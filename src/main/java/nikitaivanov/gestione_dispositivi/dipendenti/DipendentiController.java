@@ -2,6 +2,7 @@ package nikitaivanov.gestione_dispositivi.dipendenti;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class DipendentiController {
 
     //Creazione Dipendenti
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Dipendenti saveDipendente(@RequestBody @Validated DipendentiDTO dipendente){
         return dipendentiService.saveDipendente(dipendente);
     }
@@ -38,6 +40,7 @@ public class DipendentiController {
 
     //Elimina Dipendente
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void  deleteDipendente(@PathVariable long id){
         dipendentiService.findByIdAndDelete(id);
     }

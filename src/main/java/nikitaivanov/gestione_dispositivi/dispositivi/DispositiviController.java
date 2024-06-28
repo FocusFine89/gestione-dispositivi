@@ -2,6 +2,7 @@ package nikitaivanov.gestione_dispositivi.dispositivi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ public class DispositiviController {
 
     //Creazione Dispositivi
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Dispositivi saveDispositivo(@RequestBody @Validated DispositiviDTO dispositivo){
         return this.dispositiviService.saveDispositivo(dispositivo);
     }
@@ -37,6 +39,7 @@ public class DispositiviController {
 
     //Elimina Dispositivo
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable long id){
         this.dispositiviService.deleteById(id);
     }
