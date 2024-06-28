@@ -1,16 +1,31 @@
 package nikitaivanov.gestione_dispositivi.dispositivi;
 
+import nikitaivanov.gestione_dispositivi.dipendenti.Dipendenti;
+
 public class Telefoni extends Dispositivi{
-    //Attributi
-    protected String tipologia;
     //Costruttori
 
-    public Telefoni(String tipologia) {
-        super(tipologia);
+    public Telefoni(String tipologia, Dipendenti dipendente) {
+        super(tipologia, dipendente);
     }
 
 
     //Metodi
+
+    @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public Dipendenti getDipendente() {
+        return super.getDipendente();
+    }
+
+    @Override
+    public void setDipendente(Dipendenti dipendente) {
+        super.setDipendente(dipendente);
+    }
 
     @Override
     public String getTipologia() {
@@ -27,6 +42,7 @@ public class Telefoni extends Dispositivi{
         return "Telefoni{" +
                 "id=" + id +
                 ", tipologia='" + tipologia + '\'' +
+                ", dipendente=" + dipendente +
                 '}';
     }
 }

@@ -21,10 +21,16 @@ public abstract class Dispositivi {
     //Costruttori
     public Dispositivi(){}
 
+    public Dispositivi(String tipologia, Dipendenti dipendente) {
+        this.tipologia = tipologia;
+        this.dipendente = dipendente;
+    }
+
     public Dispositivi(String tipologia) {
         this.tipologia = tipologia;
     }
     //Metodi
+
 
     public long getId() {
         return id;
@@ -38,11 +44,20 @@ public abstract class Dispositivi {
         this.tipologia = tipologia;
     }
 
+    public Dipendenti getDipendente() {
+        return dipendente;
+    }
+
+    public void setDipendente(Dipendenti dipendente) {
+        this.dipendente = dipendente;
+    }
+
     @Override
     public String toString() {
         return "Dispositivi{" +
                 "id=" + id +
                 ", tipologia='" + tipologia + '\'' +
+                ", dipendente=" + dipendente +
                 '}';
     }
 }
