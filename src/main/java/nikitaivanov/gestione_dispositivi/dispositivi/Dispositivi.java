@@ -5,14 +5,13 @@ import nikitaivanov.gestione_dispositivi.dipendenti.Dipendenti;
 
 @Entity
 @Table(name = "dispositivi")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipologia_dispositivo")
-public abstract class Dispositivi {
+public  class Dispositivi {
     //Attributi
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected String tipologia;
+    protected String stato;
 
     @ManyToOne
     @JoinColumn(name = "dipendente", nullable = true)
@@ -21,8 +20,9 @@ public abstract class Dispositivi {
     //Costruttori
     public Dispositivi(){}
 
-    public Dispositivi(String tipologia, Dipendenti dipendente) {
+    public Dispositivi(String tipologia, String stato, Dipendenti dipendente) {
         this.tipologia = tipologia;
+        this.stato = stato;
         this.dipendente = dipendente;
     }
 
@@ -44,6 +44,14 @@ public abstract class Dispositivi {
         this.tipologia = tipologia;
     }
 
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
     public Dipendenti getDipendente() {
         return dipendente;
     }
@@ -57,6 +65,7 @@ public abstract class Dispositivi {
         return "Dispositivi{" +
                 "id=" + id +
                 ", tipologia='" + tipologia + '\'' +
+                ", stato='" + stato + '\'' +
                 ", dipendente=" + dipendente +
                 '}';
     }

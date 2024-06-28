@@ -1,5 +1,7 @@
 package nikitaivanov.gestione_dispositivi.dipendenti;
 
+import nikitaivanov.gestione_dispositivi.exceptions.BadRequestException;
+import nikitaivanov.gestione_dispositivi.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +20,7 @@ public class DipendentiService {
         //1.Verificare se il dipendente già esiste nel database (lo facciamo tramite E-mail)
         this.dipendentiRepository.findByEmail(newDipendente.email()).ifPresent(
                 dipendenti -> {
-                    throw new RuntimeException("Un dipendente con l'email " + newDipendente.email() + " già esiste");
+                    throw new BadRequestException("Un dipendente con l'email " + newDipendente.email() + " già esiste");
                 }
         );
 
@@ -51,7 +53,7 @@ public class DipendentiService {
 
     //Cerca Dipendente per ID
     public Dipendenti findById(long id){
-        return dipendentiRepository.findById(id).orElseThrow(()-> new RuntimeException("Dipendente non trovato"));
+        return dipendentiRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
     }
 
     //Elimina dipendente

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class DipendentiController {
 
     @Autowired
-    DipendentiService dipendentiService;
+    private DipendentiService dipendentiService;
 
     //Creazione Dipendenti
     @PostMapping
