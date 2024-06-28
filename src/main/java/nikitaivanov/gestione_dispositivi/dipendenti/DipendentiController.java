@@ -5,6 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/dipendenti")
@@ -43,6 +46,12 @@ public class DipendentiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void  deleteDipendente(@PathVariable long id){
         dipendentiService.findByIdAndDelete(id);
+    }
+
+    //Cambiare immagine di profilo del Dipendente
+    @PostMapping("/{userId}/avatar")
+    public String  uploadAvatar(@PathVariable int userId, @RequestParam("avatar")MultipartFile image) throws IOException {
+        return this.dipendentiService.uploadImage(image, userId);
     }
 
 }

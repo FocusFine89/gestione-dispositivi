@@ -1,5 +1,7 @@
 package nikitaivanov.gestione_dispositivi.dipendenti;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import nikitaivanov.gestione_dispositivi.exceptions.BadRequestException;
 import nikitaivanov.gestione_dispositivi.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class DipendentiService {
 
     @Autowired
     DipendentiRepository dipendentiRepository;
+
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
     //Creazione Dipendente
     public Dipendenti saveDipendente(DipendentiDTO newDipendente){
@@ -66,6 +74,13 @@ public class DipendentiService {
     //---------DA FARE PER ULTIMO-----------
 
     //settare immagine di profilo da cloudinary
+    public String uploadImage(MultipartFile file, long id) throws IOException{
+        //cerco un dipendente con l'id passato
+        Dipendenti foundDipendente = this.findById(id);
+        String url= (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        foundDipendente.setProfileImageUrl(url);
+        return url;
+    }
 
 
 
